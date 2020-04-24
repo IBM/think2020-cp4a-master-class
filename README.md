@@ -43,7 +43,7 @@
 
 The [IBM Cloud Pak for Applications](https://www.ibm.com/cloud/cloud-pak-for-applications) includes a wide range of runtime platforms, supporting a flexible progression of development techniques and deployment architectures, from traditional WebSphere Application Server workloads to serverless microservices running in a Kubernetes environment.
 
-The conceptual overview in Figure 1 shows the core platforms and components bundled with the Cloud Pak. This lab explores the development process for serverless microservices the latest runtime capabilities in the Red Hat OpenShift Container Platform (OCP), such as the Red Hat Service Mesh (based on the Istio service mesh) and Red Hat Serverless (based on the Knative runtime framework). Refer to sub-section [1.2](#12-complementary-labs) (["Complementary labs"](#12-complementary-labs)) for suggestions of other labs covering components not covered in this lab.
+The conceptual overview in Figure 1 shows the core platforms and components bundled with the Cloud Pak. This lab explores the development process for serverless microservices the latest runtime capabilities in the Red Hat OpenShift Container Platform (OCP), such as the Red Hat Service Mesh (based on the Istio service mesh). Refer to sub-section [1.2](#12-complementary-labs) (["Complementary labs"](#12-complementary-labs)) for suggestions of other labs covering components not covered in this lab.
 
 ![Components and runtimes bundled with IBM Cloud Pak for Applications](/images/cp4a-components.png)  
 **Figure 1 - Components and runtimes bundled with IBM Cloud Pak for Applications**
@@ -53,7 +53,7 @@ The conceptual overview in Figure 1 shows the core platforms and components bund
 
 This lab was created to engage the participant in an interactive tour of the software development capabilities built into the Cloud Pak for Applications. The exercises are built to be brief while also showing the potential for further exploration after the lab with links to more in-depth guides and tutorials.
 
-The lab's focus is on the "Accelerator for Teams" component of the Cloud Pak for Applications and the OpenShift Container Platform. The "Accelerator for Teams" component is centered around the creation of microservices built atop "application stacks" of software, which abstracts many complicated aspects of application deployment while also offering consistent runtimes to support governance requirements.
+The lab's focus is on the "Accelerator for Teams" component of the Cloud Pak for Applications and on the OpenShift Container Platform. The "Accelerator for Teams" component is centered around the creation of microservices built atop "application stacks" of software, which abstracts many complicated aspects of application deployment while also offering consistent runtimes to support governance requirements.
 
 Given the 2-hour time slot available for the lab, and the many other labs already covering the application development model in great detail, this lab is focused on the packaging, deployment, and operational aspects of Cloud Pak for Applications.
 
@@ -687,12 +687,12 @@ Note the left-navigation bar for the panels associated with each element of the 
 
 The Tekton dashboard offers a few extra capabilities, especially the ability to create new pipeline resources (source code repositories and target repository for container images) as well as webhooks. These resources contain a lot of fields that are error-prone to type by hand, so that some administrators may prefer to create the resources that way.
 
-You can explore the Tekton dashboard in more detail using the "Build and deploy applications with pipelines" guide, accessible from the "Guides" section of the Cloud Pak console (see section [2.3](#23-cloud-pak-console) (["Cloud Pak Console"](#23-cloud-pak-console)).
+You can explore the Tekton dashboard in more detail using the "Build and deploy applications with pipelines" guide, accessible from the "Guides" section of the Cloud Pak console (see section [2.3](#23-cloud-pak-console) - ["Cloud Pak Console"](#23-cloud-pak-console)).
 
 
 #### 3.5.4.3. Triggering manual runs
 
-A manual build run can be triggered with the creation of a PipelineRun object in the cluster. Before creating that run for each service, you need to create the PipelineResource objects for the run.
+A manual build run can be triggered with the creation of a PipelineRun object in the cluster. Before creating that run for each service, you need to create the `PipelineResource` objects for the run.
 
 Take a look at the file `/home/ibmdemo/cp4a-labs/think20/service-a/tekton/service-a-manual-pipeline-run-v1.yaml`, first inspecting the two `PipelineResource` objects, where the first describes the target location for the image created in the pipeline run and the second describes the source location for the code.
 
