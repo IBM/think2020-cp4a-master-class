@@ -363,6 +363,7 @@ HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .sp
 
 cd /home/ibmdemo/cp4a-labs/think20/service-a
 
+# this may take a few minutes
 appsody build \
     --pull-url image-registry.openshift-image-registry.svc:5000 \
     --push-url $HOST/cloudlab \
@@ -384,6 +385,7 @@ HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .sp
 
 cd /home/ibmdemo/cp4a-labs/think20/service-b
 
+# this may take a few minutes
 appsody build \
     --pull-url image-registry.openshift-image-registry.svc:5000 \
     --push-url $HOST/cloudlab \
@@ -397,6 +399,7 @@ HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .sp
 
 cd /home/ibmdemo/cp4a-labs/think20/service-c
 
+# this may take a few minutes
 appsody build \
     --pull-url image-registry.openshift-image-registry.svc:5000 \
     --push-url $HOST/cloudlab \
@@ -1008,7 +1011,7 @@ Launch the console using the "host/port" in the above output:
 
 [https://grafana-istio-system.apps.demo.ibmdte.net](https://grafana-istio-system.apps.demo.ibmdte.net/)
 
-You will likely be prompted to accept the risk of opening the self-signed certificate for this air-gapped system. You will also be prompted to log in to OpenShift, following the instructions from section [2.2.1](#221-logging-into-the-red-hat-ocp-console) (["Logging into the Red Hat OCP console"](#221-logging-into-the-red-hat-ocp-console)).
+**Important**: You will likely be prompted to accept the risk of opening the self-signed certificate for this air-gapped system. You will also be prompted to log in to OpenShift, following the instructions from section [2.2.1](#221-logging-into-the-red-hat-ocp-console) (["Logging into the Red Hat OCP console"](#221-logging-into-the-red-hat-ocp-console)).
 
 Now select the "Explore" button on the left navigation bar of the Grafana console, type the following expression in the field labelled `Enter a PromQL query`, then press Enter:
 
