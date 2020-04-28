@@ -1016,7 +1016,7 @@ Launch the console using the "host/port" in the above output:
 Now select the "Explore" button on the left navigation bar of the Grafana console, type the following expression in the field labelled `Enter a PromQL query`, then press Enter:
 
 ```
-avg by (destination\_service\_name, destination\_version, response\_code)(rate(istio\_requests\_total{destination\_service\_namespace="cloudlab"}[5m]))
+avg by (destination_service_name, destination_version, response_code)(rate(istio_requests_total{destination_service_namespace="cloudlab"}[5m]))
 ```
 
 You should see a screen similar to Figure 16.
