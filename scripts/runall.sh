@@ -29,18 +29,18 @@ cd /tmp/nodejs-app
 
 appsody init kabanero/nodejs-express
 
-appsody run
+# appsody run 
 # End code block, line: 237
 
 
 # New code block, line: 241
-curl localhost:3000
+# curl localhost:3000
 # End code block, line: 243
 
 
 # New code block, line: 253
-cd /tmp/nodejs-app
-appsody stop
+#cd /tmp/nodejs-app
+# appsody stop
 # End code block, line: 256
 
 
