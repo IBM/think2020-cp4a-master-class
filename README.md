@@ -160,8 +160,8 @@ Additionally, the "elasticsearch" component may have an older version still bein
 
 ```sh
 oc delete ClusterServiceVersion elasticsearch-operator.4.3.5-202003020549 \
---ignore-not-found=true \
--n openshift-operators
+    --ignore-not-found=true \
+    -n openshift-operators
 ```
 
 
@@ -346,7 +346,9 @@ OCP does not expose its image registry outside the cluster by default, mostly to
 Expose the container registry and log in to it entering the following instructions based on the contents of the previous URL:
 
 ```sh
-oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+oc patch configs.imageregistry.operator.openshift.io/cluster \
+    --patch '{"spec":{"defaultRoute":true}}' \
+    --type=merge
 
 HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}')
 
