@@ -315,7 +315,7 @@ The applications in this lab generate distributed tracing information that can b
 
 Create a `ConfigMap` ([https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-a-configmap)) object informing the applications about the sampling rates and destination for distributed tracing information generated:
 
-```
+```sh
 cat<<EOF | oc apply -n cloudlab -f -
 apiVersion: v1
 kind: ConfigMap
