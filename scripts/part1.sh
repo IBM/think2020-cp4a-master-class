@@ -10,6 +10,7 @@ oc delete ClusterServiceVersion elasticsearch-operator.4.3.5-202003020549 \
     -n openshift-operators
 # End code block, line: 165
 
+oc create namespace istio-system
 
 # New code block, line: 196
 appsody repo list
@@ -24,25 +25,28 @@ appsody list kabanero
 
 
 # New code block, line: 230
-mkdir /tmp/nodejs-app
+rm -rf /tmp/nodejs-app
+mkdir -p /tmp/nodejs-app
 cd /tmp/nodejs-app
 
 appsody init kabanero/nodejs-express
 
-# appsody run 
+appsody run &
 # End code block, line: 237
 
 
 # New code block, line: 241
-# curl localhost:3000
+sleep 30
+curl localhost:3000
 # End code block, line: 243
 
 
 # New code block, line: 253
-#cd /tmp/nodejs-app
-# appsody stop
+cd /tmp/nodejs-app
+appsody stop
 # End code block, line: 256
 
+rm -rf /home/ibmdemo/cp4a-labs/think20
 
 # New code block, line: 279
 mkdir -p /home/ibmdemo/cp4a-labs/think20

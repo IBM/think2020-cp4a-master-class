@@ -10,7 +10,7 @@
   * [2.2. Red Hat OCP console and command-line interface](#22-red-hat-ocp-console-and-command-line-interface)
     + [2.2.1. Logging into the Red Hat OCP console](#221-logging-into-the-red-hat-ocp-console)
     + [2.2.2. Logging into the Red Hat OpenShift command-line interface](#222-logging-into-the-red-hat-openshift-command-line-interface)
-    + [2.2.3. Patching the lab environment](#223-patching-the-lab-environment)
+    + [2.2.3. Updating the lab environment](#223-updating-the-lab-environment)
   * [2.3. Cloud Pak Console](#23-cloud-pak-console)
   * [2.4. ­Application stacks](#24--application-stacks)
     + [2.4.1. Using application stack hubs](#241-using-application-stack-hubs)
@@ -23,7 +23,7 @@
     + [3.4.1. Building and pushing the image to a container registry](#341-building-and-pushing-the-image-to-a-container-registry)
   * [3.5. Deploying the application](#35-deploying-the-application)
     + [3.5.1. Using "appsody deploy"](#351-using--appsody-deploy-)
-    + [3.5.2. Inspect results of deployment](#352-inspect-results-of-deployment)
+    + [3.5.2. Inspect results of the deployment](#352-inspect-results-of-the-deployment)
     + [3.5.3. (optional section) Using the OpenShift command-line interface](#353--optional-section--using-the-openshift-command-line-interface)
     + [3.5.4. Using pipelines](#354-using-pipelines)
       - [3.5.4.1. Using a webhook](#3541-using-a-webhook)
@@ -62,11 +62,11 @@ If you like the specific code examples used in this lab and want to go through c
 
 ## 1.2. Complementary labs
 
-For a broader view of the capabilities of the Cloud Pak for Applications, check lab **"6969 – A Deep Dive on IBM Cloud Pak for Applications".**
+For a broader view of the capabilities of the Cloud Pak for Applications, check lab **"6969 – A Deep Dive on IBM Cloud Pak for Applications"**.
 
-For an in-depth view into the application modernization portion of the Cloud Pak for Applications, check lab " **1305 How to make Liberty your destination for Migration, Modernizing and new Microservices".**
+For an in-depth view into the application modernization portion of the Cloud Pak for Applications, check lab  **"1305 How to make Liberty your destination for Migration, Modernizing and new Microservices"**.
 
-For a demonstration of development using the hosted coding capabilities built into CodeReady Workspaces, check lab " **1751 Develop Your Kube-App from Zero to Hero with CodeReady Workspaces and Codewind".**
+For a demonstration of development using the hosted coding capabilities built into CodeReady Workspaces, check lab **"1751 Develop Your Kube-App from Zero to Hero with CodeReady Workspaces and Codewind"**.
 
 After this lab, you can continue your experience with Cloud Pak for Applications through these self-paced hands-on labs at [https://www.ibm.com/demos/collection/Cloud-Pak-for-Applications/](https://www.ibm.com/demos/collection/Cloud-Pak-for-Applications/), using a self-service reservation system to have access to a real environment and step-by-step instructions.
 
@@ -96,12 +96,12 @@ Access to the environment is initiated via web-browser from your local computer 
 
 Once you launch your environment, you will see a screen similar to the one in Figure 4, with a control tile corresponding to each virtual machine.
 
-**Important** : Familiarize yourself with the environment instructions, located at [https://help.skytap.com/SmartClient\_Help\_Page.html](https://help.skytap.com/SmartClient_Help_Page.html), which contains information for first-time users of the environment as well as common troubleshooting steps, such as locating credentials and performing simple activities like scaling the remote desktop to match your screen settings and using the clipboard between your local workstation and the remote environment.
+**Important**: Familiarize yourself with the environment instructions, located at [https://help.skytap.com/SmartClient\_Help\_Page.html](https://help.skytap.com/SmartClient_Help_Page.html), which contains information for first-time users of the environment as well as common troubleshooting steps, such as locating credentials and performing simple activities like scaling the remote desktop to match your screen settings and using the clipboard between your local workstation and the remote environment.
 
 ![Control screen for the lab environment](images/lab-environment.png)  
 **Figure 4 - Control screen for the lab environment**
 
-All virtual machines should be in a "Running" state before starting the lab exercise, but if for whatever reason you see one of them in a "Suspended" or "Powered off" state before the lab starts, click on the "Play" ![](RackMultipart20200424-4-13y8zwq_html_768aa9a1ec42cc49.png) button in the area immediately above the tiles to start all virtual machines that are not, as seen in Figure 5. Using the individual controls in a tile is not advised as it is recommended that the virtual machines are started in a pre-programmed order that is already observed by the global "Play" button.
+All virtual machines should be in a "Running" state before starting the lab exercise, but if for whatever reason you see one of them in a "Suspended" or "Powered off" state before the lab starts, click on the "Play" button in the area immediately above the tiles to start all virtual machines that are not, as seen in Figure 5. Using the individual controls in a tile is not advised as it is recommended that the virtual machines are started in a pre-programmed order that is already observed by the global "Play" button.
 
 ![Controls for virtual machines](images/lab-env-controls.png)  
 **Figure 5 - Controls for virtual machines**
@@ -148,7 +148,7 @@ Select "Display Token" and copy-paste the command under "Log in with this token"
 Accept any eventual prompt about "Use insecure connections", which is specific to this air-gapped environment. Actual production environments would have valid certificates in front of the OpenShift API endpoint and would not ask you about accepting untrusted certificates.
 
 
-### 2.2.3. Patching the lab environment
+### 2.2.3. Updating the lab environment
 
 The environment may have outstanding certificate signing requests depending on the timing between the provisioning of the environment and the actual time the VMs are started. To ensure there are no outstanding requests, log in to the command-line interface according to the previous section and enter the following command on a terminal:
 
@@ -156,12 +156,18 @@ The environment may have outstanding certificate signing requests depending on t
 oc get csr -o name | xargs oc adm certificate approve
 ```
 
-Additionally, the "elasticsearch" component may have an older version still being resolved after the cluster starts. This older version may delay the progress of the later sections of the lab, so you need to manually delete it by entering the following command in a terminal:
+The "elasticsearch" component may have an older version still being resolved after the cluster starts. This older version may delay the progress of the later sections of the lab, so you need to manually delete it by entering the following command in a terminal:
 
 ```sh
 oc delete ClusterServiceVersion elasticsearch-operator.4.3.5-202003020549 \
     --ignore-not-found=true \
     -n openshift-operators
+```
+
+Later sections of this lab will need this namespace to be prepared to run a service mesh, which may take a few minutes to be fully initialized, so you need to enter the following command now to save time later on:
+
+```sh
+oc create namespace istio-system
 ```
 
 
@@ -228,7 +234,7 @@ kabanero nodejs-express     ...      scaffold, *simple  ...
 As an example, you can create a new application based on one of the application stacks and run it locally without the pre-installation of any development tooling or runtime for testing, entering the following commands:
 
 ```sh
-mkdir /tmp/nodejs-app
+mkdir -p /tmp/nodejs-app
 cd /tmp/nodejs-app
 
 appsody init kabanero/nodejs-express
@@ -378,7 +384,7 @@ Note the usage of the following parameters:
 - `push-url` is the address of the remote registry as exposed to the "workstation" virtual machine
 - `tag` is the name and version of the image in the registry
 
-Also note that this step will create (or update) a file named "app-deploy.yaml" in the application directory, which contains an `AppsodyOperator` object describing the deployment and service configuration for the application.
+Also, note that this step will create (or update) a file named "app-deploy.yaml" in the application directory, which contains an `AppsodyOperator` object describing the deployment and service configuration for the application.
 
 Push the image for service B to the container registry, entering the following commands:
 
@@ -490,7 +496,7 @@ appsody deploy \
 Once you have all deployment requests in progress, you can jump to the next section to see the processes in progress.
 
 
-### 3.5.2. Inspect results of deployment
+### 3.5.2. Inspect results of the deployment
 
 You can inspect the results of the deployment operations from either the command-line interface or from the OCP console.
 
@@ -647,7 +653,7 @@ These pipelines run natively on Kubernetes, using the following types of objects
 After the lab, you can also try these resources for an even better understanding of Tekton pipelines:
 
 - 6-minute video: [https://developer.ibm.com/videos/what-is-tekton/](https://developer.ibm.com/videos/what-is-tekton/)
-- Step-by-step tutorial on creating a pipeline from the ground up: [https://developer.ibm.com/tutorials/deploy-a-hello-world-application-on-kubernetes-using-tekton-pipelines/](https://developer.ibm.com/tutorials/deploy-a-hello-world-application-on-kubernetes-using-tekton-pipelines/)
+- A step-by-step tutorial on creating a pipeline from the ground up: [https://developer.ibm.com/tutorials/deploy-a-hello-world-application-on-kubernetes-using-tekton-pipelines/](https://developer.ibm.com/tutorials/deploy-a-hello-world-application-on-kubernetes-using-tekton-pipelines/)
 
 A pipeline run can be initiated in two different ways:
 
@@ -880,7 +886,9 @@ git clone https://github.com/think-2020-cp4a/monitoring.git
 Create the target namespace for the service mesh configuration, then create both the `ServiceMeshControlPlane` and the `ServiceMeshMemberRoll` objects that will enable the service mesh in the "cloudlab" namespace.
 
 ```sh
-oc create namespace istio-system
+# Namespace created earlier in the lab
+# oc create namespace istio-system
+
 cd /home/ibmdemo/cp4a-labs/think20/monitoring
 
 oc apply -f smcp.yaml -n istio-system
@@ -1026,7 +1034,7 @@ You should see a screen similar to Figure 16.
 ![Graph with traffic data over time for the microservice architecture](images/grafana-explore.png)  
 **Figure 16 - Graph with traffic data over time for the microservice architecture**
 
-As a last exercise with Grafana, select "Dashboards" from the left menu again and click on the "Manage" button, then click on the "Import" button. In the "Import" panel, select "Upload .json file" and select the file "GrafanaLabDashboard.json" in the "monitoring" project you cloned at the beginning of this section, located at "/home/ibmdemo/cp4a-labs/think20/monitoring/GrafanaLabDashboard.json".
+As the last exercise with Grafana, select "Dashboards" from the left menu again and click on the "Manage" button, then click on the "Import" button. In the "Import" panel, select "Upload .json file" and select the file "GrafanaLabDashboard.json" in the "monitoring" project you cloned at the beginning of this section, located at "/home/ibmdemo/cp4a-labs/think20/monitoring/GrafanaLabDashboard.json".
 
 You should see a dashboard similar to the one in Figure 17.
 
@@ -1061,7 +1069,7 @@ You will likely be prompted to accept the risk of opening the self-signed certif
 ![Overview of applications in service mesh, illustrating degraded status for the applications in the "cloudlab" namespace](images/kiali-overview.png)  
 **Figure 18 - Overview of applications in service mesh, illustrating degraded status for the applications in the "cloudlab" namespace**
 
-Note the degradation in the applications you just deployed, which was artificially injected into the communication through the service mesh "fault injection" capability. After the lab, you are encouraged to learn more about all other networking capabilities available in the service mesh, reading through and applying the examples available at [https://istio.io/docs/concepts/traffic-management/](https://istio.io/docs/concepts/traffic-management/) .
+Note the degradation in the applications you just deployed, which was artificially injected into the communication through the service mesh "fault injection" capability. After the lab, you are encouraged to learn more about all other networking capabilities available in the service mesh, reading through and applying the examples available at [https://istio.io/docs/concepts/traffic-management/](https://istio.io/docs/concepts/traffic-management/).
 
 Now select the "Graph" view from the left navigation bar and make the following configuration changes to see the traffic in Figure 19:
 
