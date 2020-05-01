@@ -926,12 +926,36 @@ Once you see all containers in a "Running" or "Completed" state, the service mes
 
 ## 4.2. Configure the ingress for the deployed service
 
+The pods running in a namespace that is a member service mesh contain an additional container, hosting a "sidecar" for the network traffic. This additional container is only added on the next time the pod is started after the namespace is added to the service mesh.
+
+You can verify that the pods in the "cloudlab" namespace only have one container at this stage, entering the following command:
+
+```sh
+oc get pod -n cloudlab
+```
+
+This command should produce output similar to the following, where you can see "1/1" as the number of containers inside each pod:
+
+```
+NAME                         READY   STATUS    ...
+service-a-...                1/1     Running   ...
+service-b-...                1/1     Running   ...
+service-c-...                1/1     Running   ...
+```
+
 You need to restart the pods in the "cloudlab" namespace since they were created before the Service Mesh was configured, entering the following command:
 
 ```sh
 oc get pod -n cloudlab -o name | xargs oc delete -n cloudlab
 ```
 
+Now wait until all pods are restarted and have the status of "Running", entering the following command or monitoring the pods via "Workload -> Pods" view of the "Administrative" perspective in the OCP console:
+
+```sh
+oc get pod -n cloudlab -w
+```
+
+Wait until all pods show the value "Running" under the "STATUS" column.
 
 ### 4.2.1. Patch for Appsody Operator issue (already fixed upstream)
 
@@ -1034,7 +1058,7 @@ You should see a screen similar to Figure 16.
 ![Graph with traffic data over time for the microservice architecture](images/grafana-explore.png)  
 **Figure 16 - Graph with traffic data over time for the microservice architecture**
 
-As the last exercise with Grafana, select "Dashboards" from the left menu again and click on the "Manage" button, then click on the "Import" button. In the "Import" panel, select "Upload .json file" and select the file "GrafanaLabDashboard.json" in the "monitoring" project you cloned at the beginning of this section, located at "/home/ibmdemo/cp4a-labs/think20/monitoring/GrafanaLabDashboard.json".
+As the last exercise with Grafana, select "Dashboards" from the left menu again and click on the "Manage" button, then click on the "Import" button. In the "Import" panel, select "Upload .json file" and select the file "GrafanaLabDashboard.json" in the "monitoring" project you cloned at the beginning of this section, located at "/home/ibmdemo/cp4a-labs/think20/monitoring/grafana/GrafanaLabDashboard.json".
 
 You should see a dashboard similar to the one in Figure 17.
 
