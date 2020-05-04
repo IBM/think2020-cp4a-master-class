@@ -98,7 +98,7 @@ Once you launch your environment, you will see a screen similar to the one in Fi
 
 **Important**: Familiarize yourself with the environment instructions, located at [https://help.skytap.com/SmartClient\_Help\_Page.html](https://help.skytap.com/SmartClient_Help_Page.html), which contains information for first-time users of the environment as well as common troubleshooting steps, such as locating credentials and performing simple activities like scaling the remote desktop to match your screen settings and using the clipboard between your local workstation and the remote environment.
 
-![Control screen for the lab environment](images/lab-environment.png)  
+![Control screen for the lab environment](images/lab-control-screen.png)  
 **Figure 4 - Control screen for the lab environment**
 
 All virtual machines should be in a "Running" state before starting the lab exercise, but if for whatever reason you see one of them in a "Suspended" or "Powered off" state before the lab starts, click on the "Play" button in the area immediately above the tiles to start all virtual machines that are not, as seen in Figure 5. Using the individual controls in a tile is not advised as it is recommended that the virtual machines are started in a pre-programmed order that is already observed by the global "Play" button.
@@ -707,7 +707,7 @@ You can explore the Tekton dashboard in more detail using the "Build and deploy 
 
 #### 3.5.4.3. Triggering manual runs
 
-A manual build run can be triggered with the creation of a PipelineRun object in the cluster. Before creating that run for each service, you need to create the `PipelineResource` objects for the run.
+A manual build run can be triggered with the creation of a `PipelineRun` object in the cluster. Before creating that run for each service, you need to create the `PipelineResource` objects for the run.
 
 Take a look at the file `/home/ibmdemo/cp4a-labs/think20/service-a/tekton/service-a-manual-pipeline-run-v1.yaml`, first inspecting the two `PipelineResource` objects, where the first describes the target location for the image created in the pipeline run and the second describes the source location for the code.
 
@@ -737,7 +737,7 @@ items:
 kind: List
 ```
 
-Now take a look at the PipelineRun object, cross-referencing the two resources, as well as the pipeline to be used ("nodejs-express-build-deploy-pl").
+Now take a look at the `PipelineRun` object, cross-referencing the two resources, as well as the pipeline to be used ("nodejs-express-build-deploy-pl").
 
 ```yaml
 apiVersion: tekton.dev/v1alpha1
