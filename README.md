@@ -57,7 +57,7 @@ The lab's focus is on the "Accelerator for Teams" component of the Cloud Pak for
 
 Given the 2-hour time slot available for the lab and the many other labs already covering the application development model in great detail, this lab is focused on the packaging, deployment, and operational aspects of the Cloud Pak for Applications.
 
-If you like the specific code examples used in this lab and want to go through code changes step-by-step, you can follow the self-paced tutorial "Distributed tracing for microservices, Part 1", located at [https://developer.ibm.com/tutorials/distributed-tracing-for-microservices-1/](https://developer.ibm.com/tutorials/distributed-tracing-for-microservices-1/).
+If you like the specific code examples used in this lab and want to go through code changes step-by-step, you can follow the self-paced tutorial "Distributed tracing for microservices, Part 1", located at [https://developer.ibm.com/tutorials/distributed-tracing-for-microservices-1/](https://developer.ibm.com/tutorials/distributed-tracing-for-microservices-1/). There is also a second part to that series, where you can deploy the code examples to a generic Kubernetes cluster in your own machine to experiment with the various monitoring dashboards covered here, at [https://developer.ibm.com/tutorials/distributed-tracing-for-microservices-part-2/](https://developer.ibm.com/tutorials/distributed-tracing-for-microservices-part-2/).
 
 
 ## 1.2. Complementary labs
